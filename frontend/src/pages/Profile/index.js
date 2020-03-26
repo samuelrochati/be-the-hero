@@ -61,33 +61,37 @@ export default function Profile() {
         </button>
       </header>
 
-      <h1>Casos cadastrados</h1>
+      {incidents.lenght > 0 ? <h1>Casos cadastrados</h1> : null}
 
       <ul>
-        {incidents.map(incident => (
-          <li key={incident.id}>
-            <strong>CASO:</strong>
-            <p>{incident.title}</p>
+        {incidents.lenght > 0 ? (
+          incidents.map(incident => (
+            <li key={incident.id}>
+              <strong>CASO:</strong>
+              <p>{incident.title}</p>
 
-            <strong>DESCRIÇÃO:</strong>
-            <p>{incident.description}</p>
+              <strong>DESCRIÇÃO:</strong>
+              <p>{incident.description}</p>
 
-            <strong>VALOR:</strong>
-            <p>
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL"
-              }).format(incident.value)}
-            </p>
+              <strong>VALOR:</strong>
+              <p>
+                {Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                }).format(incident.value)}
+              </p>
 
-            <button
-              onClick={() => handleDeleteincident(incident.id)}
-              type="button"
-            >
-              <FiTrash2 size={20} color="#a8a8b3" />
-            </button>
-          </li>
-        ))}
+              <button
+                onClick={() => handleDeleteincident(incident.id)}
+                type="button"
+              >
+                <FiTrash2 size={20} color="#a8a8b3" />
+              </button>
+            </li>
+          ))
+        ) : (
+          <h1>Nenhum caso cadastrado</h1>
+        )}
       </ul>
     </div>
   );
